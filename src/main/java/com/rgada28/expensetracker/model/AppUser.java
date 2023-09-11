@@ -1,6 +1,8 @@
 package com.rgada28.expensetracker.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity()
@@ -20,9 +23,16 @@ public class AppUser implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private Integer userId;
+
     @Column(unique = true,nullable = false)
     private String username;
 
+    @Email(message = "Enter a valid email-Id")
+    @Column(unique = true,nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    @NotEmpty(message = "Password should be at least 8 characters")
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -32,6 +42,9 @@ public class AppUser implements UserDetails {
             inverseJoinColumns = {@JoinColumn(name = "role_id")}
     )
     private Set<Role> authorities;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Category> categoryList;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

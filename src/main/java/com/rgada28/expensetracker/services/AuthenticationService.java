@@ -16,7 +16,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -44,7 +46,8 @@ public class AuthenticationService {
         Role userRole = roleRepository.findByAuthority("USER").get();
         Set<Role> authorities = new HashSet<>();
         authorities.add(userRole);
-        return userRepository.save(new AppUser(0,username,encodedPassword,authorities));
+        List<Category> categories = new ArrayList<>();
+        return userRepository.save(new AppUser(0,username,email,encodedPassword,authorities,categories));
     }
 
     public LoginResponseDTO login(String username, String password){

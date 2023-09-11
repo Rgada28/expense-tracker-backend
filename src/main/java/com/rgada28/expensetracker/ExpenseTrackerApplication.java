@@ -1,6 +1,7 @@
 package com.rgada28.expensetracker;
 
 import com.rgada28.expensetracker.model.AppUser;
+import com.rgada28.expensetracker.model.Category;
 import com.rgada28.expensetracker.model.Role;
 import com.rgada28.expensetracker.repository.AppUserRepository;
 import com.rgada28.expensetracker.repository.RoleRepository;
@@ -10,7 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @SpringBootApplication
@@ -29,7 +32,8 @@ public class ExpenseTrackerApplication {
 
 			Set<Role> roles = new HashSet<>();
 			roles.add(adminRole);
-			AppUser admin = new AppUser(1, "admin", passwordEncoder.encode("password"), roles);
+			List<Category> categories = new ArrayList<>();
+			AppUser admin = new AppUser(1, "admin","admin@test.com",passwordEncoder.encode("password"), roles,categories);
 			appUserRepository.save(admin);
 		};
 	}

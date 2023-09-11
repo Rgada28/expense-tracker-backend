@@ -2,8 +2,8 @@ package com.rgada28.expensetracker.controller;
 
 
 import com.rgada28.expensetracker.model.AppUser;
-import com.rgada28.expensetracker.model.LoginResponseDTO;
-import com.rgada28.expensetracker.model.RegistrationDTO;
+import com.rgada28.expensetracker.dto.LoginResponseDTO;
+import com.rgada28.expensetracker.dto.RegistrationDTO;
 import com.rgada28.expensetracker.services.AuthenticationService;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +20,7 @@ public class AuthenticationController {
     @PostMapping("/register")
     public AppUser registerUser(@RequestBody RegistrationDTO body){
         System.out.println(body);
-        return authenticationService.registerUser(body.username(),body.password());
+        return authenticationService.registerUser(body.username(),body.password(), body.email());
 
     }
 

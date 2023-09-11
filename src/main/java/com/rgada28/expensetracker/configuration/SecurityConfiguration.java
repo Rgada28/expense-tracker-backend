@@ -64,7 +64,6 @@ public class SecurityConfiguration {
                     auth.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasRole("ADMIN");
                     auth.requestMatchers(new AntPathRequestMatcher("/user/**")).hasAnyRole("ADMIN", "USER");
                 });
-//        http.headers(header -> header.frameOptions().disable());
         http.headers(header-> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
 
         http.oauth2ResourceServer((rs) ->

@@ -2,7 +2,8 @@ package com.rgada28.expensetracker.services;
 
 
 import com.rgada28.expensetracker.model.AppUser;
-import com.rgada28.expensetracker.model.LoginResponseDTO;
+import com.rgada28.expensetracker.dto.LoginResponseDTO;
+import com.rgada28.expensetracker.model.Category;
 import com.rgada28.expensetracker.model.Role;
 import com.rgada28.expensetracker.repository.AppUserRepository;
 import com.rgada28.expensetracker.repository.RoleRepository;
@@ -38,7 +39,7 @@ public class AuthenticationService {
     private TokenService tokenService;
 
 
-    public AppUser registerUser(String username, String password){
+    public AppUser registerUser(String username, String password, String email){
         String encodedPassword = encoder.encode(password);
         Role userRole = roleRepository.findByAuthority("USER").get();
         Set<Role> authorities = new HashSet<>();

@@ -1,4 +1,6 @@
-package com.rgada28.expensetracker.model;
+package com.rgada28.expensetracker.dto;
+
+import com.rgada28.expensetracker.model.AppUser;
 
 public class LoginResponseDTO {
     private AppUser user;

@@ -1,10 +1,13 @@
 package com.rgada28.expensetracker.controller;
 
 
+import com.rgada28.expensetracker.dto.LoginRequestDTO;
+import com.rgada28.expensetracker.dto.RegistrationResponseDTO;
 import com.rgada28.expensetracker.model.AppUser;
 import com.rgada28.expensetracker.dto.LoginResponseDTO;
-import com.rgada28.expensetracker.dto.RegistrationDTO;
 import com.rgada28.expensetracker.services.AuthenticationService;
+import jakarta.validation.Valid;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,21 +16,19 @@ import org.springframework.web.bind.annotation.*;
 public class AuthenticationController {
     private AuthenticationService authenticationService;
 
-    public AuthenticationController(AuthenticationService authenticationService){
-        this.authenticationService=authenticationService;
+    public AuthenticationController(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
     }
 
     @PostMapping("/register")
-    public AppUser registerUser(@RequestBody RegistrationDTO body){
-        System.out.println(body);
-        return authenticationService.registerUser(body.username(),body.password(), body.email());
+    public RegistrationResponseDTO registerUser(@RequestBody @Valid AppUser user) {
+        return authenticationService.registerUser(user.getUsername(), user.getPassword(), user.getEmail());
 
     }
 
     @PostMapping("/login")
-    public LoginResponseDTO login(@RequestBody RegistrationDTO body){
-        System.out.println(body);
-        return authenticationService.login(body.username(),body.password());
+    public LoginResponseDTO login(@RequestBody LoginRequestDTO body) throws BadCredentialsException {
+        return authenticationService.login(body.username(), body.password());
     }
 
 

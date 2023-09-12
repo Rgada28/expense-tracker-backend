@@ -3,6 +3,7 @@ package com.rgada28.expensetracker.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ public class AppUser implements UserDetails {
     private Integer userId;
 
     @Column(unique = true,nullable = false)
+    @NotNull(message = "User name cannot be null")
     private String username;
 
     @Email(message = "Enter a valid email-Id")

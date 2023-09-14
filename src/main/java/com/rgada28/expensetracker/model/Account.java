@@ -18,11 +18,8 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer accountId;
 
-    @NotNull(message = "First name cannot be null")
-    protected String firstname;
-
-    @NotNull(message = "Last name cannot be null")
-    protected String lastname;
+    @NotNull(message = "Account name cannot be null")
+    protected String accountName;
 
     @NotNull(message = "Account number cannot be null")
     private String accountNumber;

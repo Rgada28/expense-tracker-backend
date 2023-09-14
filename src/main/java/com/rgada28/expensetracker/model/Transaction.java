@@ -16,7 +16,7 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer transactionId;
+    private Long transactionId;
 
     private String merchant;
 

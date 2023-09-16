@@ -27,6 +27,9 @@ public class Transaction {
     @NotNull(message = "Amount cannot be null")
     private Double amount;
 
+    @NotNull
+    private String PaymentMode;
+
     @Positive(message = "Cashback cannot be negative")
     private double cashback;
 
@@ -40,13 +43,13 @@ public class Transaction {
     private String description;
 
     @OneToOne
-    @JoinColumn(name="category_id")
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @ManyToOne()
     @JoinColumn(name = "account_id")
     @NotNull(message = "Account cannot be null")
-    private Account fromAccount;
+    private Account account;
 
     @NotNull(message = "Mode of payment cannot be null")
     private String modeOfPayment;

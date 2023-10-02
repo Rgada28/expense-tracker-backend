@@ -33,7 +33,7 @@ public class Account {
     @JoinColumn(name="user_id")
     private AppUser appUser;
 
-    @OneToMany(mappedBy = "fromAccount")
+    @OneToMany(mappedBy = "account")
     private List<Transaction> transactions;
 }
 

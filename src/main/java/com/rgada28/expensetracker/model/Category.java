@@ -19,12 +19,17 @@ public class Category {
 
     private Boolean isExpense;
 
+    @ManyToOne
+    @JoinColumn(name = "parent_category_id")
+    private Category parentCategory;
+
     @OneToMany(mappedBy = "parentCategory", cascade = CascadeType.ALL)
-    private final List<SubCategory> subCategories = new ArrayList<>();
+    private final List<Category> subCategories = new ArrayList<>();
 
 
     @ManyToOne()
     @NotNull(message = "User cannot be null")
+    @JoinColumn(name = "user_id")
     private AppUser user;
 
 

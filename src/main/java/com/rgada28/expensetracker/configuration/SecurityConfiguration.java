@@ -55,7 +55,6 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> {
-
                     auth.requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll();
                     auth.requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll();
                     auth.requestMatchers(new AntPathRequestMatcher("/swagger-ui.html/**")).permitAll();

@@ -16,7 +16,7 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long transactionId;
+    private Integer transactionId;
 
     private String merchant;
 
@@ -27,20 +27,17 @@ public class Transaction {
     @NotNull(message = "Amount cannot be null")
     private Double amount;
 
-    @NotNull
-    private String PaymentMode;
-
-    @Positive(message = "Cashback cannot be negative")
-    private double cashback;
+//    @Positive(message = "Cashback cannot be negative")
+//    private double cashback;
 
     @DateTimeFormat
     @NotNull(message = "Date cannot be null")
-    private LocalDate date;
+    private LocalDate transactionDate;
 
-    @Positive(message = "Own Share cannot be negative")
-    private double ownShare;
+//    @Positive(message = "Own Share cannot be negative")
+//    private double ownShare;
 
-    private String description;
+//    private String description;
 
     @OneToOne
     @JoinColumn(name = "category_id")

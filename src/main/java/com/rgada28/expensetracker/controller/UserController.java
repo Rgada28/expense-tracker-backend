@@ -1,17 +1,48 @@
 package com.rgada28.expensetracker.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.rgada28.expensetracker.model.AppUser;
+import com.rgada28.expensetracker.services.AppUserService;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
 @CrossOrigin("*")
 public class UserController {
 
+    private final AppUserService appUserService;
+
+    public UserController(AppUserService appUserService) {
+        this.appUserService = appUserService;
+    }
+
     @GetMapping("/")
     public String helloUserController(){
         return "User access level";
+    }
+
+
+    @GetMapping("/{userId}")
+    public AppUser getUserById(@PathVariable Integer userId) throws Exception {
+        return appUserService.getUserById(userId);
+    }
+
+    @PostMapping()
+    public ResponseEntity<AppUser> registerUser(@Valid @RequestBody AppUser user)  {
+        return new ResponseEntity<AppUser>(appUserService.createUser(user),HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{userId}")
+    public AppUser updateUser(@Valid @RequestBody AppUser user, @PathVariable Integer userId) throws Exception {
+        return appUserService.updateUser(user,userId);
+    }
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<String> deleteUser(@PathVariable Integer userId){
+        appUserService.deleteUser(userId);
+       return new ResponseEntity<String>("User Deleted successfully", HttpStatus.OK);
     }
 }

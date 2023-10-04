@@ -16,7 +16,7 @@ public class TransactionService {
 
     public Transaction getById(Integer transactionId) throws Exception {
         //TODO Throw more Specific Exception
-     return   transactionRepository.findById(transactionId).orElseThrow(() -> new Exception("Transaction record not found for following id: - " + transactionId));
+     return   transactionRepository.findById(transactionId).orElseThrow(() -> new Exception("Transaction record not found for following id:-"+ transactionId));
     }
     public Transaction createTransaction(Transaction transaction){
         //TODO add validaions
@@ -33,8 +33,9 @@ public class TransactionService {
         transactionRepository.deleteById(transactionId);
     }
 
-    public void createOrUpdateTransaction(Transaction transaction){
+    public Transaction updateTransaction(Transaction transaction, Integer transactionId) throws Exception {
+        getById(transactionId);
         //TODO check whether the transaction exists
-        transactionRepository.saveAndFlush(transaction);
+        return transactionRepository.saveAndFlush(transaction);
     }
 }

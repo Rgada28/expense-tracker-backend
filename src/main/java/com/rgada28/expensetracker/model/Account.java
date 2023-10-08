@@ -27,7 +27,10 @@ public class Account {
     @PositiveOrZero(message = "Account Balance cannot be negative")
     private Double balance;
 
-    private Double creditLimit;
+    @NotNull(message = "Account either has to be lending or savings product")
+    private boolean isLending;
+
+    private Boolean isActive;
 
     @ManyToOne
     @JoinColumn(name="user_id")

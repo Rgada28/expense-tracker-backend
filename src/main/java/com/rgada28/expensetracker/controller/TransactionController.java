@@ -34,16 +34,17 @@ public class TransactionController {
 
     @PostMapping
     public ResponseEntity<Transaction> createTransaction(@Valid @RequestBody Transaction transact){
-        return new ResponseEntity<Transaction>( service.createTransaction(transact), HttpStatus.CREATED);
+        return new ResponseEntity<>(service.createTransaction(transact), HttpStatus.CREATED);
     }
-    @PutMapping
+    @PutMapping("/{transactionId}")
     public ResponseEntity<Transaction> updateTransaction(@Valid @RequestBody Transaction transaction,Integer transactionId) throws Exception {
-        return new ResponseEntity<Transaction>( service.updateTransaction(transaction,transactionId), HttpStatus.CREATED);
+        return new ResponseEntity<>(service.updateTransaction(transaction, transactionId), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{transactionId}")
     public ResponseEntity<String> deleteTransaction(@PathVariable Integer transactionId){
-        return new ResponseEntity<String>("Transaction Delete successfully",HttpStatus.OK);
+        service.deleteTransaction(transactionId);
+        return new ResponseEntity<>("Transaction Delete successfully", HttpStatus.OK);
     }
 
 }

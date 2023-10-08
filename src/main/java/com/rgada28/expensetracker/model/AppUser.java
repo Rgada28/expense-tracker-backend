@@ -25,7 +25,7 @@ public class AppUser implements UserDetails {
     @Column(name = "user_id")
     private Integer userId;
 
-    @Column(unique = true,nullable = false)
+    @Column(unique = true)
     @NotNull(message = "User name cannot be null")
     private String username;
 
@@ -33,7 +33,7 @@ public class AppUser implements UserDetails {
     @Column(unique = true,nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    @NotNull
     @NotEmpty(message = "Password should be at least 8 characters")
     private String password;
 
@@ -54,12 +54,12 @@ public class AppUser implements UserDetails {
     }
 
     @Override
-    public String getPassword() {
+    public @NotNull String getPassword() {
         return this.password;
     }
 
     @Override
-    public String getUsername() {
+    public @NotNull String getUsername() {
         return this.username;
     }
 

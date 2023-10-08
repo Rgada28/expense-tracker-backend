@@ -24,7 +24,7 @@ public class UserController {
         return "User access level";
     }
 
-
+//TODO Use DTO to return the Response
     @GetMapping("/{userId}")
     public AppUser getUserById(@PathVariable Integer userId) throws Exception {
         return appUserService.getUserById(userId);
@@ -32,7 +32,7 @@ public class UserController {
 
     @PostMapping()
     public ResponseEntity<AppUser> registerUser(@Valid @RequestBody AppUser user)  {
-        return new ResponseEntity<AppUser>(appUserService.createUser(user),HttpStatus.CREATED);
+        return new ResponseEntity<>(appUserService.createUser(user), HttpStatus.CREATED);
     }
 
     @PutMapping("/{userId}")
@@ -43,6 +43,6 @@ public class UserController {
     @DeleteMapping("/{userId}")
     public ResponseEntity<String> deleteUser(@PathVariable Integer userId){
         appUserService.deleteUser(userId);
-       return new ResponseEntity<String>("User Deleted successfully", HttpStatus.OK);
+       return new ResponseEntity<>("User Deleted successfully", HttpStatus.OK);
     }
 }

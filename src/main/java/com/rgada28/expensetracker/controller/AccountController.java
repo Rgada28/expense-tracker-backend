@@ -1,6 +1,7 @@
 package com.rgada28.expensetracker.controller;
 
 
+import com.rgada28.expensetracker.dto.AccountResponseDTO;
 import com.rgada28.expensetracker.model.Account;
 import com.rgada28.expensetracker.services.AccountService;
 import jakarta.validation.Valid;
@@ -15,22 +16,23 @@ public class AccountController {
 
     private final AccountService accountService;
 
-    public AccountController(AccountService accountService){
-        this.accountService=accountService;
+    public AccountController(AccountService accountService) {
+        this.accountService = accountService;
     }
 
     @GetMapping("/{accountId}")
-    public Account getAccountById(@PathVariable Integer accountId) throws Exception {
-     return accountService.getAccountById(accountId);
+    public AccountResponseDTO getAccountById(@PathVariable Integer accountId) throws Exception {
+        return accountService.getAccountById(accountId);
 
     }
 
     @PostMapping
-    public ResponseEntity<Account> createAccount(@Valid @RequestBody Account account){
+    public ResponseEntity<AccountResponseDTO> createAccount(@Valid @RequestBody Account account) {
         return new ResponseEntity<>(accountService.createAccount(account), HttpStatus.CREATED);
     }
+
     @PutMapping("/{accountId}")
-    public ResponseEntity<Account> updateTransaction(@Valid @RequestBody Account account,Integer accountId) throws Exception {
+    public ResponseEntity<AccountResponseDTO> updateTransaction(@Valid @RequestBody Account account, Integer accountId) throws Exception {
         return new ResponseEntity<>(accountService.updateAccount(account, accountId), HttpStatus.CREATED);
     }
 
